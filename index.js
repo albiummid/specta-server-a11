@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const fileUpload = require('express-fileupload');
-const port = 5000
+const port = 5090
 require('dotenv').config();
 
 
