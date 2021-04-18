@@ -30,6 +30,7 @@ client.connect(err => {
     const reviewCollection = client.db(`${process.env.DB_NAME}`).collection('reviews');
     const adminCollection = client.db(`${process.env.DB_NAME}`).collection('admins');
     const orderCollection = client.db(`${process.env.DB_NAME}`).collection('orders');
+    const footerCollection = client.db(`${process.env.DB_NAME}`).collection('footer');
 
 
     app.post('/addAFeature', (req, res) => {
@@ -151,12 +152,41 @@ client.connect(err => {
                 res.send(result.insertedCount > 0);
         })
     })
+    // deleteOrder
+    app.delete('/deleteOrder/:id', (req, res) => {
+        orderCollection.deleteOne({ _id: ObjectId(`${req.params.id}`) })
+          .then(result => {
+            res.send(result.deletedCount > 0)
+          })
+    })
+    
+    // updateOrder
+  app.patch('/updateOrder/:id', (req, res) => {
+    orderCollection.updateOne({ _id: ObjectId(`${req.params.id}`) }, {
+      $set: { status: req.body.status }
+    })
+      .then(result => res.send(result.modifiedCount > 0))
+  })
 
     app.get('/ordersByEmail', (req, res) => {
         const email = req.query.email;
-        orderCollection.find({ email: email })
+        orderCollection.find({email:email})
             .toArray((err, documents) => {
                 res.send(documents);
+        })
+    })
+    app.get('/allOrders', (req, res) => {
+        orderCollection.find({})
+            .toArray((err, documents) => {
+                res.send(documents);
+        })
+    })
+    
+    // footerInser
+    app.get('/footer', (req, res) => {
+        footerCollection.find({})
+            .toArray((err, documents) => {
+            res.send(documents)
         })
     })
 
