@@ -2,7 +2,7 @@
 
 
 # Server Repository:
-https://github.com/albiummid/specta-server-a11d
+https://github.com/albiummid/specta-server-a11
 
 ## Client Repository Link:
 https://github.com/albiummid/specta-client-a11
