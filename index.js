@@ -186,8 +186,13 @@ client.connect(err => {
     app.get('/footer', (req, res) => {
         footerCollection.find({})
             .toArray((err, documents) => {
-            res.send(documents)
-        })
+                res.send(documents)
+            })
+    });
+
+
+    app.get('/tokenCheck/:id', (req, res) => {
+        console.log();
     })
 
 
